@@ -1,9 +1,9 @@
 place_holder <- function(){
-  ggplot(x = seq(0, 1, .1), y = seq(0, 1, .1)) + 
+  ggplot(x = seq(0, 20, 1), y = seq(0, 100, 1)) + 
     geom_vline(xintercept = .05, linetype = 'dashed') + 
-    scale_x_continuous(breaks=seq(0,1,.05), limits = c(-.01, 1.01), expand = expansion()) + 
-    scale_y_continuous(labels = NULL, breaks = NULL) + 
-    labs(y = "", x = 'P value', 
+    # scale_x_continuous(breaks=seq(5,20,1), limits = c(-.01, 1.01), expand = expansion()) + 
+    # scale_y_continuous(labels = NULL, breaks = NULL) + 
+    labs(y = "Scores", x = 'Hour', 
          title = 'Collect Data to See Results!') + 
     theme_classic() + 
     theme(axis.line.y=element_blank(),
