@@ -14,21 +14,20 @@ shinyServer(function(input, output,session) {
   observeEvent(input$explore, {
     updateTabItems(session, "tabs", "first")
   })
+
+    #the generate data
   observeEvent(input$plot, {
     store$data <- generate_data()
     store$Train_data <- store$data[1:80,]
-    
-  })
-  
-  observeEvent(input$validate, {
-    store$data <- generate_data()
     store$Test_data <- store$data[81:100,]
     
   })
   
+
   
+
   output$train <- renderPlot({
-    if (length(store$Train_data) != 0){
+    if (length(store$data) != 0){
       p <- ggplot(store$Train_data, aes(x = hours, y = score)) +
         geom_point()
     }else{
@@ -39,7 +38,7 @@ shinyServer(function(input, output,session) {
   
   
   output$test <- renderPlot({
-    if (length(store$Test_data) != 0){
+    if (length(store$data) != 0){
       p <- ggplot(store$Test_data, aes(x = hours, y = score)) +
         geom_point()
     }else{
@@ -47,6 +46,7 @@ shinyServer(function(input, output,session) {
     }
     return(p)
   })
+  
   
     
   
