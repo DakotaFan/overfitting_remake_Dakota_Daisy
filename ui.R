@@ -88,11 +88,11 @@ tabItem(tabName = "first",
                      explanatory variables and the response variable. Later, the 
                      researcher will run a validation study with new, independent
                      observations for X."),
-                 actionButton("plot", h5(tags$strong("Plot the training data"))), 
+                 actionButton("plot", h5(tags$strong("Generate trainig and testing data"))), 
                  br(),
                  br(),
                  conditionalPanel("input.plot != 0",
-                                  actionButton("validate", h5(tags$strong("Plot the testing data"))))),
+                                  actionButton("validate", h5(tags$strong("Fitting the linear function"))))),
           mainPanel("Traing VS Testing",
                     fluidRow(
                 splitLayout(cellWidths = c("50%", "50%"), plotOutput("train"), plotOutput("test")))
