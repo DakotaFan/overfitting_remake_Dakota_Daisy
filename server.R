@@ -12,11 +12,20 @@ make_lm_formula = function(x,y, power){
   
 }
 
-# lm_model = function(lm_formula, data){
-#   lm_formula = as.formula(lm_formula)
-#   lm_model = lm(lm_formula, data = data)
-#   return(lm_model)
-# }
+MSE = function(y_true, y_predict){
+  return ((1/length(y_true))*sum((y_true - y_predict)**2))
+  
+}
+
+evaluate_model = function(train_data, model_name, test_data, outcome){
+  model = lm(as.formula(model_name), data = train_data)
+  new = data.frame(x = test_data)
+  y_pred = predict(model,  new)
+  return (MSE(test_data[[outcome]], y_pred))
+}
+
+
+
 
 shinyServer(function(input, output,session) {
   store <- reactiveValues()
@@ -44,7 +53,7 @@ shinyServer(function(input, output,session) {
   output$train <- renderPlot({
     if (length(store$data) != 0){
       p <- ggplot(store$Train_data, aes(x = hours, y = score)) +
-        geom_point()
+        geom_point()+geom_smooth(method = 'lm')
     }else{
       p <- place_holder()
     }
@@ -55,7 +64,7 @@ shinyServer(function(input, output,session) {
   output$test <- renderPlot({
     if (length(store$data) != 0){
       p <- ggplot(store$Test_data, aes(x = hours, y = score)) +
-        geom_point()#+geom_smooth(method='lm')
+        geom_point()+geom_smooth(method = 'lm')
     }else{
       p <- place_holder()
     }
@@ -95,6 +104,19 @@ shinyServer(function(input, output,session) {
     }
     return(p)
   })
+  
+  
+  # ## Calculate MSE
+  # MSE = reactive({
+  #   req(model_name())
+  #   evaluate_model(store$Train_data(), model_name(), store$Test_data(), 'score')
+  # })
+  
+  # ## Print mean square error
+  # output$MSE <- renderPrint({
+  #   req(MSE())
+  #   print(paste0('Mean Squared Error: ', MSE()))
+  # })
   
   
   
