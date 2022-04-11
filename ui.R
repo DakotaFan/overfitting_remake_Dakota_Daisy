@@ -89,6 +89,7 @@ tabItem(tabName = "first",
                      researcher will run a validation study with new, independent
                      observations for X."),
                  actionButton("plot", h5(tags$strong("Generate trainig and testing data"))), 
+                 sliderInput(inputId='Degree', label='Degree', min=1, max=5, value=1, step = 1),
                  br(),
                  br(),
                  conditionalPanel("input.plot != 0",
