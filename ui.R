@@ -95,7 +95,12 @@ tabItem(tabName = "first",
                                   actionButton("validate", h5(tags$strong("Fitting the linear function"))))),
           mainPanel("Traing VS Testing",
                     fluidRow(
-                splitLayout(cellWidths = c("50%", "50%"), plotOutput("train"), plotOutput("test")))
+                splitLayout(cellWidths = c("50%", "50%"),
+                            plotOutput("train"), 
+                            plotOutput("test"),),
+                splitLayout(cellWidths = c("50%", "50%"),
+                            plotOutput("LM_train"),
+                            plotOutput("LM_test")))
                 
               
                  

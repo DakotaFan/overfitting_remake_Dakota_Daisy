@@ -1,7 +1,10 @@
 library(shiny)
 library(ggplot2)
 
-
+## Function that Make linear regression formula
+make_lm_formula = function(predictors, outcome){
+  return(paste0(outcome, '~', paste0(predictors, collapse = '+')))
+}
 
 shinyServer(function(input, output,session) {
   store <- reactiveValues()
@@ -25,7 +28,7 @@ shinyServer(function(input, output,session) {
   
 
   
-
+  ## Plot train dataset
   output$train <- renderPlot({
     if (length(store$data) != 0){
       p <- ggplot(store$Train_data, aes(x = hours, y = score)) +
@@ -36,16 +39,49 @@ shinyServer(function(input, output,session) {
     return(p)
   })
   
-  
+  ## Plot test dataset
   output$test <- renderPlot({
     if (length(store$data) != 0){
       p <- ggplot(store$Test_data, aes(x = hours, y = score)) +
-        geom_point()
+        geom_point()#+geom_smooth(method='lm')
     }else{
       p <- place_holder()
     }
     return(p)
   })
+  
+
+  
+  ## Plot linear regression after clicking 'Fitting the linear function' button
+  ## 1. Create model after clicking button
+  model_name = eventReactive(input$validate,{
+    make_lm_formula('hour', 'scores')
+  })
+  
+  ## 2. Fit data with model
+  output$LM_train = renderPlot({
+    req(model_name())
+    if (length(store$data) != 0){
+      p <- ggplot(store$Train_data, mapping=aes(x = hours, y = score))+
+        geom_point()+geom_smooth(method = 'lm')
+    }else{
+      p <- place_holder()
+    }
+    return(p)
+    })
+  
+  output$LM_test = renderPlot({
+    req(model_name())
+    if (length(store$data) != 0){
+      p <- ggplot(store$Test_data, mapping=aes(x = hours, y = score))+
+        geom_point()+
+        geom_smooth(method = 'lm')
+    }else{
+      p <- place_holder()
+    }
+    return(p)
+  })
+  
   
   
     
