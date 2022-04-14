@@ -1,8 +1,28 @@
 # overfitting_remake_Dakota_Daisy
-Remaking overthinking app
+Remaking overfitting app.
 
-Overview Page
+
+
+
+
+
+
+# Our app Vs Boast app
+
+
+# Overview Page: 
+
+
 <img src="./Screen Shot 2022-04-12 at 11.09.08 PM.png">
-Instruction Page
+# Instruction Page:
+
+
 <img src="./Screen Shot 2022-04-12 at 11.09.17 PM.png">
-Explore Page
+# Explore Page:
+
+<img src="./Screen Shot 2022-04-12 at 11.11.07 PM.png">
+
+
+# BOAST Overfitting app:
+
+
