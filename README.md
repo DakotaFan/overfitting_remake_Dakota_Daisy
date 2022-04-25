@@ -1,5 +1,6 @@
 # overfitting_remake_Dakota_Daisy
 Remaking overfitting app.
+Here is our published app: https://dakotafan.shinyapps.io/Visualizing_Overfitting_with_R
 
 ## What is the purpose of this app? 
 
